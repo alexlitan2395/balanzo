@@ -13,6 +13,11 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+
+    env:
+      HOST: localhost
+      PORT: 3000
+
     steps:
       - uses: actions/checkout@v4
         with:
