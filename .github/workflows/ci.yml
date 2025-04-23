@@ -39,6 +39,21 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      # Build and start NestJS app (backend)
+      - name: Build and Start NestJS app (background)
+        run: |
+          npx nx build backend
+          npx nx serve backend & # Start the NestJS app
+          sleep 10 # Wait for the backend to boot up
+
+      # Build and start Angular app (frontend)
+      - name: Build and Start Angular app (background)
+        run: |
+          npx nx build frontend
+          npx nx serve frontend & # Start the Angular app
+          sleep 10  # Wait for the frontend to boot up
+
+      # Run affected commands (lint, test, build, e2e)
       - run: pnpm exec nx affected -t lint test build e2e
         env:
           NX_CLOUD: false
