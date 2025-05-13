@@ -1,8 +1,24 @@
+import { z } from 'zod';
+
+const EmailSchema = z.string().email();
+
 export class Email {
-  constructor(private readonly value: string) {
-    if (!/^\S+@\S+\.\S+$/.test(value)) throw new Error('Invalid email');
+  private constructor(private readonly value: string) {}
+
+  static create(email: string): Email {
+    if (!email) throw new Error('Email is required');
+    const parsedEmail = EmailSchema.safeParse(email);
+    if (!parsedEmail.success) {
+      throw new Error('Invalid email format');
+    }
+    return new Email(parsedEmail.data.toLowerCase());
   }
-  getValue() {
+
+  getValue(): string {
     return this.value;
   }
 }
+
+
+
+

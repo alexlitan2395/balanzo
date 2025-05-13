@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -427,7 +427,7 @@ import { CommonModule } from '@angular/common';
         <div id="welcome">
           <h1 class="font-display!">
             <span> Hello there, </span>
-            Welcome frontend 👋
+            Welcome {{ title() }} 👋
           </h1>
         </div>
         <!--  HERO  -->
@@ -857,4 +857,6 @@ nx g &#64;nx/angular:component ui/src/lib/button</pre>
   styles: [],
   encapsulation: ViewEncapsulation.None,
 })
-export class NxWelcomeComponent {}
+export class NxWelcomeComponent {
+  title = input('test')
+}

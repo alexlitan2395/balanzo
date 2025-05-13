@@ -35,9 +35,11 @@
       }
     },
     "test": {
-      "options": {
-        "passWithNoTests": true
-      }
+        "executor": "@nx/jest:jest",
+        "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+        "options": {
+          "jestConfig": "apps/backend/jest.config.ts"
+        }
     },
     "docker-build": {
       "dependsOn": ["build"],
