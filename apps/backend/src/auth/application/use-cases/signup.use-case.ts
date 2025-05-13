@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignupCommand } from '../commands/signup.command';
+import { AuthCommand } from '../commands/auth.command';
 import { IUserRepository } from '../../domain/repositories/user-repository.interface';
 import { Email } from '../../domain/value-objects/email.vo';
 import { Password } from '../../domain/value-objects/password.vo';
@@ -10,7 +10,7 @@ import { randomUUID } from 'crypto';
 export class SignupUseCase {
   constructor(private readonly userRepo: IUserRepository) {}
 
-  async execute(command: SignupCommand): Promise<User> {
+  async execute(command: AuthCommand): Promise<User> {
     const email = Email.create(command.email);
     const existing = await this.userRepo.findByEmail(email.getValue());
     if (existing) throw new Error('Email already used');
